@@ -13,9 +13,12 @@ def cumulative_sum(L):
 	L: the original list
 	returns: a new list where element i is equal to the sum of element
 		 0 through i in the original list """
-    for i in range(len(L)):
-        L[i] = L[i-1] + L[i]
-    return L
+    C = []
+    C.append(L[0])
+    for i in range(1,len(L)):
+        print i
+        C.append(C[i-1] + L[i])
+    return C
 
 if __name__ == '__main__':
     print cumulative_sum([1, 2, 3])
