@@ -87,9 +87,9 @@ def remap_interval(val, input_interval_start, input_interval_end, output_interva
     #print scale_factor
     return val*scale_factor + (output_interval_start-input_interval_start*scale_factor)
 
-red = build_random_function(12,15)
-green = build_random_function(2,5)
-blue = build_random_function(8,10)
+red = build_random_function(6,7)
+green = build_random_function(3,4)
+blue = build_random_function(15,18)
 
 image_size = [1000,1000]
 
@@ -102,10 +102,17 @@ for i in range(im.size[0]):
         x = remap_interval(i,0.0,float(image_size[0]),-1.0,1.0)
         y = remap_interval(j,0.0,float(image_size[1]),-1.0,1.0)
         #print [x,y]
-        r = int(remap_interval(evaluate_random_function(red,x,y),-1.0,1.0,0.0,255.0)*.7)
-        g = int(remap_interval(evaluate_random_function(green,x,y),-1.0,1.0,0.0,255.0))
+        r = int(remap_interval(evaluate_random_function(red,x,y),-1.0,1.0,0.0,255.0))
+        g = int(remap_interval(evaluate_random_function(green,x,y),-1.0,1.0,0.0,255.0)*.3)
         b = int(remap_interval(evaluate_random_function(blue,x,y),-1.0,1.0,0.0,255.0))
         #print [r,g,b]
         pixels[i,j] = (r,g,b)
-print pixels
-im.save("image11.png")
+print "Done!"
+print "Red: ",
+print red
+print "Green: ",
+print green
+print "Blue: ",
+print blue
+
+im.save("image15.png")
