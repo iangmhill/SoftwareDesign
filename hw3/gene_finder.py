@@ -28,11 +28,13 @@ def coding_strand_to_AA(dna):
                  the input DNA fragment
     """
     aminoacid = ""
-    for n in range(0,len(dna),3):
+    for n in range(0,len(dna),3):   #Good use of range's iterating argument
         for m in range(len(codons)):
             if dna[n:n+3] in codons[m]:
-                aminoacid = aminoacid + aa[m]
+                aminoacid = aminoacid + aa[m]   #Consider using += to make your code a bit more succint
     return aminoacid
+
+    #Beautiful and compact function.
                  
 
 def coding_strand_to_AA_unit_tests():
@@ -55,6 +57,8 @@ def get_complement(nuc):
     elif nuc == 'C':
         return 'G'
 
+    #Great use of a helper function.
+
 def get_reverse_complement(dna):
     """ Computes the reverse complementary sequence of DNA for the specfied DNA
         sequence
@@ -64,7 +68,10 @@ def get_reverse_complement(dna):
     """   
     revcom = ""
     for n in range(len(dna)):
-        revcom += get_complement(dna[-1-n])
+        revcom += get_complement(dna[-1-n]) #Backwards iteration is a nice, compact solution to this problem.
+                                            #In future, it may make it a bit more intuitive to give range
+                                            #a 3rd argument of -1 to make the backwards iteration a bit more
+                                            #easily understood, but its a matter of preference.
     return revcom
     
 def get_reverse_complement_unit_tests():
@@ -85,9 +92,13 @@ def rest_of_ORF(dna):
     """
     
     for n in range(0,len(dna),3):
-        if dna[n:n+3] == "TAG" or  dna[n:n+3] == "TGA" or dna[n:n+3] == "TAA":
-            return dna[:n]
+        if dna[n:n+3] == "TAG" or  dna[n:n+3] == "TGA" or dna[n:n+3] == "TAA":  #In future, it may help reduce repetition in your
+                                                                                #code if you use a structure like this: 
+                                                                                # "if dna[n:n+3] in ['TAG', 'TGA', 'TAA']:"
+            return dna[:n]  #Good use of using one substring argument empty
     return dna
+
+    #Very succint. Again, well done.
 
 def rest_of_ORF_unit_tests():
     """ Unit tests for the rest_of_ORF function """
@@ -141,6 +152,8 @@ def find_all_ORFs(dna):
     """
     return find_all_ORFs_oneframe(dna[0:]) + find_all_ORFs_oneframe(dna[1:]) + find_all_ORFs_oneframe(dna[2:])
 
+    #Yay! A one line function!
+
 def find_all_ORFs_unit_tests():
     """ Unit tests for the find_all_ORFs function """
         
@@ -163,6 +176,8 @@ def find_all_ORFs_both_strands(dna):
      
     return find_all_ORFs(dna) + find_all_ORFs(get_reverse_complement(dna))
 
+    #Gorgeous
+
 def find_all_ORFs_both_strands_unit_tests():
     """ Unit tests for the find_all_ORFs_both_strands function """
 
@@ -182,8 +197,8 @@ def longest_ORF(dna):
     max_length = 0
     max_index = 0
     ORFs = find_all_ORFs_both_strands(dna)
-    for n in range(len(ORFs)):
-        if len(ORFs[n]) > max_length:
+    for n in range(len(ORFs)):  
+        if len(ORFs[n]) > max_length: #Using max() at the end might save you some lines here.
             max_length = len(ORFs[n])
             max_index = n
     if len(ORFs) > 0:
@@ -216,9 +231,9 @@ def longest_ORF_noncoding(dna, num_trials):
         #print(n),
         dna_list = list(dna)
         shuffle(dna_list)
-        dna_shuffled = collapse(dna_list)       
+        dna_shuffled = collapse(dna_list)
         length = len(longest_ORF(dna_shuffled))
-        if length > max_length:
+        if length > max_length: # max()
             max_length = length
     return max_length
 
@@ -240,6 +255,6 @@ def gene_finder(dna, threshold):
     return aminoacidsequences
 
 
-dna = load_seq("./data/X73525.fa")
+#dna = load_seq("./data/X73525.fa")
 #print(longest_ORF_noncoding(dna,1500))
-print(gene_finder(dna,849))
+#print(gene_finder(dna,849))
