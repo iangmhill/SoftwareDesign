@@ -21,6 +21,7 @@ files = [
         ]
         
 commonWords = ['the','and','to','i','a','it','of','in','she','you','that','was','her','but','be','as','with']
+# she and her made the cut but not he or his?
 
 def stripBoilerPlate(book):
     """
@@ -124,6 +125,7 @@ Only needs to be run once!
 
 #------------------------------ Main Program ------------------------------#
 
+# It would be good practice in future to wrap this in an if __name__=="__main__":
 
 books = []
 booksInThisPeriod = []
